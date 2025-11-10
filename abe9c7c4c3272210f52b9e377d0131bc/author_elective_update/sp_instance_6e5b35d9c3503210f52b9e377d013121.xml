@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="2">e65b35d9c3503210f52b9e377d01311f</sp_column>
+        <sp_widget display_value="My Surveys">04b1cc07c3231200e44574e1c1d3ae96</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-29 09:28:10</sys_created_on>
+        <sys_id>6e5b35d9c3503210f52b9e377d013121</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>My Surveys</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sp_instance_6e5b35d9c3503210f52b9e377d013121</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 12:55:43</sys_updated_on>
+        <title>My Surveys</title>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=6e5b35d9c3503210f52b9e377d013121"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</application>
+        <file_path/>
+        <instance_id>e6b177f8ebb82e94cbbffceacad0cdc9</instance_id>
+        <instance_name>dev319762</instance_name>
+        <name>sp_instance_6e5b35d9c3503210f52b9e377d013121</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance"><sp_instance action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>default</color><css/><glyph/><id/><order>1</order><roles/><short_description/><size>md</size><sp_column display_value="2">e65b35d9c3503210f52b9e377d01311f</sp_column><sp_widget display_value="My Surveys">04b1cc07c3231200e44574e1c1d3ae96</sp_widget><sys_class_name>sp_instance</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-09-29 09:28:10</sys_created_on><sys_id>6e5b35d9c3503210f52b9e377d013121</sys_id><sys_mod_count>1</sys_mod_count><sys_name>My Surveys</sys_name><sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package><sys_policy/><sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope><sys_update_name>sp_instance_6e5b35d9c3503210f52b9e377d013121</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-10-03 12:55:43</sys_updated_on><title>My Surveys</title><url/><widget_parameters/></sp_instance><sys_translated_text action="delete_multiple" query="documentkey=6e5b35d9c3503210f52b9e377d013121"/></record_update>]]></payload>
+        <payload_hash>-581602220</payload_hash>
+        <record_name>My Surveys</record_name>
+        <reverted_from/>
+        <source>23e9c7c4c3272210f52b9e377d0131c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-03 12:55:43</sys_created_on>
+        <sys_id>71311fe2c3dc7210f52b9e377d0131f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>199aa2483950000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 12:55:43</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>f5311fe244dc7210d704dc5fd287a8f8</update_guid>
+        <update_guid_history>f5311fe244dc7210d704dc5fd287a8f8:-581602220,265b35d95550321063efc6d8ff04b223:-605293069</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="My Surveys">40715326c3dc7210f52b9e377d01314a</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-03 12:56:42</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>71e80be8fa3b4961af96340fa9a97db9</sys_id>
+        <sys_metadata>6e5b35d9c3503210f52b9e377d013121</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My Surveys</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_scope_delete display_value="">b4818d0ec64c4b90938e43429105b100</sys_scope_delete>
+        <sys_update_name>sp_instance_6e5b35d9c3503210f52b9e377d013121</sys_update_name>
+        <sys_update_version display_value="sp_instance_6e5b35d9c3503210f52b9e377d013121">71311fe2c3dc7210f52b9e377d0131f9</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 12:56:42</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

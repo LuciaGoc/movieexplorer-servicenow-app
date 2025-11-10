@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_param_defs">
+    <sys_rest_message_fn_param_defs action="INSERT_OR_UPDATE">
+        <name>session_id</name>
+        <order>100</order>
+        <rest_message_function display_value="Add Rating">cab4dd34c3af6210f52b9e377d0131bc</rest_message_function>
+        <sys_class_name>sys_rest_message_fn_param_defs</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-21 10:41:00</sys_created_on>
+        <sys_id>f455dd34c3af6210f52b9e377d0131b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>session_id</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_rest_message_fn_param_defs_f455dd34c3af6210f52b9e377d0131b2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-21 10:41:00</sys_updated_on>
+        <value>dba78a0f42e4b23de82c063f06117a3294c966dc</value>
+    </sys_rest_message_fn_param_defs>
+</record_update>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="a8472aa4c3332210f52b9e377d0131fd" sys_domain="global" table="x_1080820_mvx_movie_actor" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>movie_ref</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-09-02 08:13:11</sys_created_on>
+            <sys_id>38476aa4c3332210f52b9e377d013105</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1080820_mvx_movie_actor" sys_domain="global" view="Default view">a8472aa4c3332210f52b9e377d0131fd</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-09-02 08:13:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>role_name</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-09-02 08:13:11</sys_created_on>
+            <sys_id>38476aa4c3332210f52b9e377d013106</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1080820_mvx_movie_actor" sys_domain="global" view="Default view">a8472aa4c3332210f52b9e377d0131fd</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-09-02 08:13:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>actor_ref</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-09-02 08:13:11</sys_created_on>
+            <sys_id>bc476aa4c3332210f52b9e377d013106</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1080820_mvx_movie_actor" sys_domain="global" view="Default view">a8472aa4c3332210f52b9e377d0131fd</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-09-02 08:13:11</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_1080820_mvx_movie_actor</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-09-02 08:13:11</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a8472aa4c3332210f52b9e377d0131fd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_1080820_mvx_movie_actor</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+            <sys_update_name>sys_ui_section_a8472aa4c3332210f52b9e377d0131fd</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-09-02 08:13:11</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_index">
+    <sys_index action="INSERT_OR_UPDATE">
+        <access_method>btree</access_method>
+        <col_name_string>movie_ref,language,type</col_name_string>
+        <index_col_name>7c4f31b8c363a210f52b9e377d0131d7,1d9ffdf4c363a210f52b9e377d013100,57cffd74c363a210f52b9e377d01310c</index_col_name>
+        <logical_table_name>x_1080820_mvx_movie_title</logical_table_name>
+        <sys_class_name>sys_index</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2025-08-22 08:10:59</sys_created_on>
+        <sys_id>d94d394dc3232210f52b9e377d0131a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1080820_mvx_movie_title</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_index_x_1080820_mvx_movie_title_movie_ref_language_type</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2025-08-22 08:10:59</sys_updated_on>
+        <table display_value="Movie Title" name="x_1080820_mvx_movie_title">78eebdf4c363a210f52b9e377d01316c</table>
+        <unique_index>true</unique_index>
+    </sys_index>
+</record_update>

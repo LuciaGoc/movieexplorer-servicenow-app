@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_composite_data">
+    <sys_ux_composite_data action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <base_filter_label>Default</base_filter_label>
+        <name>Movie Explorer Search Config</name>
+        <query_parameters/>
+        <required_roles/>
+        <sort_order>descend</sort_order>
+        <sys_class_name>sys_ux_composite_data</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-03 14:24:19</sys_created_on>
+        <sys_id>f145676ec310b210f52b9e377d0131f0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Movie Explorer Search Config</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_ux_composite_data_f145676ec310b210f52b9e377d0131f0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 14:24:19</sys_updated_on>
+    </sys_ux_composite_data>
+</record_update>

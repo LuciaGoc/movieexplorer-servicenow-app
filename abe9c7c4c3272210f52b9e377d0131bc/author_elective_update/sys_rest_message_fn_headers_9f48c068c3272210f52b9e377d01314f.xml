@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_headers">
+    <sys_rest_message_fn_headers action="DELETE">
+        <name>Authorization</name>
+        <rest_message_function display_value="Default GET">bb5def9cc3632210f52b9e377d01314e</rest_message_function>
+        <sys_class_name>sys_rest_message_fn_headers</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-20 10:27:01</sys_created_on>
+        <sys_id>9f48c068c3272210f52b9e377d01314f</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Authorization</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_rest_message_fn_headers_9f48c068c3272210f52b9e377d01314f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-20 10:57:58</sys_updated_on>
+        <value>Bearer ${tmdb.API_key}</value>
+    </sys_rest_message_fn_headers>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</application>
+        <file_path/>
+        <instance_id>e6b177f8ebb82e94cbbffceacad0cdc9</instance_id>
+        <instance_name>dev319762</instance_name>
+        <name>sys_rest_message_fn_headers_9f48c068c3272210f52b9e377d01314f</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_headers"><sys_rest_message_fn_headers action="INSERT_OR_UPDATE"><name>Authorization</name><rest_message_function display_value="Default GET">bb5def9cc3632210f52b9e377d01314e</rest_message_function><sys_class_name>sys_rest_message_fn_headers</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-08-20 10:27:01</sys_created_on><sys_id>9f48c068c3272210f52b9e377d01314f</sys_id><sys_mod_count>3</sys_mod_count><sys_name>Authorization</sys_name><sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package><sys_policy/><sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope><sys_update_name>sys_rest_message_fn_headers_9f48c068c3272210f52b9e377d01314f</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-08-20 10:57:58</sys_updated_on><value>Bearer ${tmdb.API_key}</value></sys_rest_message_fn_headers></record_update>]]></payload>
+        <payload_hash>-918201793</payload_hash>
+        <record_name>Authorization</record_name>
+        <reverted_from/>
+        <source>23e9c7c4c3272210f52b9e377d0131c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-20 10:57:58</sys_created_on>
+        <sys_id>3340d4e0c3672210f52b9e377d0131c7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>198c720e5c20000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-20 10:57:58</sys_updated_on>
+        <type>HTTP Headers</type>
+        <update_guid>f740d4e01f6722108a50e00dcf16afc6</update_guid>
+        <update_guid_history>f740d4e01f6722108a50e00dcf16afc6:-918201793,424a4c686527221099b1bff40257e39b:-771642531,36c940a8cc272210c8b1cc7ebe27ae86:102657820,26394c6815272210615c62fe0f4b1bab:-1805330270</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-20 11:02:10</sys_created_on>
+        <sys_db_object display_value="" name="sys_rest_message_fn_headers">sys_rest_message_fn_headers</sys_db_object>
+        <sys_id>016cd2f3b6184d409bf5d062d1517151</sys_id>
+        <sys_metadata>9f48c068c3272210f52b9e377d01314f</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Authorization</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_parent display_value="Default GET">bb5def9cc3632210f52b9e377d01314e</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_scope_delete display_value="">b4818d0ec64c4b90938e43429105b100</sys_scope_delete>
+        <sys_update_name>sys_rest_message_fn_headers_9f48c068c3272210f52b9e377d01314f</sys_update_name>
+        <sys_update_version display_value="sys_rest_message_fn_headers_9f48c068c3272210f52b9e377d01314f">3340d4e0c3672210f52b9e377d0131c7</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-20 11:02:10</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

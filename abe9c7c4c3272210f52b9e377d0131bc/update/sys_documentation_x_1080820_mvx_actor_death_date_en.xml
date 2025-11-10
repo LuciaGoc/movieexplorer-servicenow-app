@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="death_date" label="Death Date" language="en" table="x_1080820_mvx_actor">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>death_date</element>
+            <help/>
+            <hint/>
+            <label>Death Date</label>
+            <language>en</language>
+            <name>x_1080820_mvx_actor</name>
+            <plural>Death Dates</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2025-08-21 14:22:44</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Death Date</sys_name>
+            <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+            <sys_update_name>sys_documentation_x_1080820_mvx_actor_death_date_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2025-08-21 14:22:44</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

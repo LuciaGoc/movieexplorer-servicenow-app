@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_data_broker_rest">
+    <sys_ux_data_broker_rest action="INSERT_OR_UPDATE">
+        <api_name>x_1080820_mvx.MoviesTableAPI</api_name>
+        <api_url>https://dev319762.service-now.com/api/now/table/x_1080820_mvx_movie</api_url>
+        <batch_exclude>false</batch_exclude>
+        <description>Fetches movie records from x_1080820_mvx_movie via ServiceNow Table API.</description>
+        <http_method>GET</http_method>
+        <mutates_server_data>true</mutates_server_data>
+        <name>MoviesTableAPI</name>
+        <output_schema>{&#13;
+  "result": [&#13;
+    {&#13;
+      "title": "The Green Mile",&#13;
+      "description": "A supernatural tale set on death row in a Southern prison...",&#13;
+      "poster_url": "https://image.tmdb.org/t/p/w500/o0lO84GI7qrG6XFvtsPOSV7CTNa.jpg",&#13;
+      "release_date": "1999-12-10"&#13;
+    }&#13;
+  ]&#13;
+}</output_schema>
+        <parameters>{&#13;
+  "sysparm_limit": "10",&#13;
+  "sysparm_query": "",&#13;
+  "sysparm_fields": "title,year,director"&#13;
+}</parameters>
+        <private>false</private>
+        <props/>
+        <request_body/>
+        <required_translations>[ ]</required_translations>
+        <schema_version>1.0.0</schema_version>
+        <sys_class_name>sys_ux_data_broker_rest</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-26 19:22:37</sys_created_on>
+        <sys_id>0f746ce0c350b210f52b9e377d0131a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>MoviesTableAPI</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_ux_data_broker_rest_0f746ce0c350b210f52b9e377d0131a1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-09-26 19:22:37</sys_updated_on>
+    </sys_ux_data_broker_rest>
+    <sys_translated_text action="delete_multiple" query="documentkey=0f746ce0c350b210f52b9e377d0131a1"/>
+</record_update>

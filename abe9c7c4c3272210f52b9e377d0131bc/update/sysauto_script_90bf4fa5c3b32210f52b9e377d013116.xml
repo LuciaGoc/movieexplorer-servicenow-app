@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 02:00:00</entered_time>
+        <max_drift/>
+        <name>Weekly Movie Update</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2025-09-05 13:43:45</run_start>
+        <run_time>1970-01-01 01:00:00</run_time>
+        <run_type>on_demand</run_type>
+        <script><![CDATA[(function() {
+    try {
+        var importer = new MovieImporter();
+        var batchSize = parseInt(gs.getProperty("x_1080820_mvx.tmdb.page_size", 20), 10);
+        if (isNaN(batchSize)) batchSize = 20;
+
+
+        // Nazov System Property, ktora bude sluzit ako bookmark
+        var propertyName = "x_1080820_mvx.last_processed_created";
+        var lastProcessed = gs.getProperty(propertyName);	        // Skontroluj, ci property existuje; ak nie, vytvor ju s prazdnou hodnotou
+
+        if (lastProcessed === null) {
+            gs.setProperty(propertyName, "");
+            lastProcessed = "";
+            gs.info("[ScheduledJob] System property '" + propertyName + "' created.");
+        }
+
+        var gr = new GlideRecord("x_1080820_mvx_movie");
+        if (lastProcessed) {
+            gr.addQuery("sys_created_on", ">", lastProcessed);
+        }
+        gr.orderBy("sys_created_on");
+        gr.setLimit(batchSize);
+        gr.query();
+
+        var processedCount = 0;
+        var newLastProcessed = lastProcessed;
+		
+		while (gr.next()) {
+            var tmdbId = gr.getValue("tmdb_id");
+            if (tmdbId) {
+                gs.info("[ScheduledJob] Updating movie: " + gr.getValue("title") + " (TMDb ID: " + tmdbId + ")");
+                importer.importMovie(tmdbId);
+            }
+            newLastProcessed = gr.getValue("sys_created_on");
+            processedCount++;
+        }
+
+        if (processedCount > 0) {
+            gs.setProperty(propertyName, newLastProcessed);
+            gs.info("[ScheduledJob] Processed " + processedCount + " movies. Last created_on: " + newLastProcessed);
+        } else {
+            gs.info("[ScheduledJob] No more records to process. Resetting bookmark.");
+            gs.setProperty(propertyName, "");
+        }
+
+    } catch (e) {
+        gs.error("[ScheduledJob] Failed: " + e.message);
+    }
+})();]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-05 13:44:49</sys_created_on>
+        <sys_id>90bf4fa5c3b32210f52b9e377d013116</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Weekly Movie Update</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sysauto_script_90bf4fa5c3b32210f52b9e377d013116</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-09-26 14:15:33</sys_updated_on>
+        <time_zone>Europe/Berlin</time_zone>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">ea5b35d9c3503210f52b9e377d013136</sp_column>
+        <sp_widget/>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-29 09:28:11</sys_created_on>
+        <sys_id>2e5b35d9c3503210f52b9e377d01313b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sp_instance_2e5b35d9c3503210f52b9e377d01313b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-09-29 09:28:11</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=2e5b35d9c3503210f52b9e377d01313b"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</application>
+        <file_path/>
+        <instance_id>e6b177f8ebb82e94cbbffceacad0cdc9</instance_id>
+        <instance_name>dev319762</instance_name>
+        <name>sp_instance_2e5b35d9c3503210f52b9e377d01313b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance"><sp_instance action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>default</color><css/><glyph/><id/><order>1</order><roles/><short_description/><size>md</size><sp_column display_value="1">ea5b35d9c3503210f52b9e377d013136</sp_column><sp_widget/><sys_class_name>sp_instance</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-09-29 09:28:11</sys_created_on><sys_id>2e5b35d9c3503210f52b9e377d01313b</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package><sys_policy/><sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope><sys_update_name>sp_instance_2e5b35d9c3503210f52b9e377d01313b</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-09-29 09:28:11</sys_updated_on><title/><url/><widget_parameters/></sp_instance><sys_translated_text action="delete_multiple" query="documentkey=2e5b35d9c3503210f52b9e377d01313b"/></record_update>]]></payload>
+        <payload_hash>-1403002866</payload_hash>
+        <record_name/>
+        <reverted_from/>
+        <source>23e9c7c4c3272210f52b9e377d0131c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-29 09:28:11</sys_created_on>
+        <sys_id>2e5b35d9c3503210f52b9e377d01313d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19994cd11270000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-09-29 09:28:11</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>225b35d9e3503210cf412201e948313d</update_guid>
+        <update_guid_history>225b35d9e3503210cf412201e948313d:-1403002866</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">e10078bac394b210f52b9e377d01319a</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-03 19:49:57</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>18e98fa1a2ad402aa756dcc0e047e4f1</sys_id>
+        <sys_metadata>2e5b35d9c3503210f52b9e377d01313b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_scope_delete display_value="">b4818d0ec64c4b90938e43429105b100</sys_scope_delete>
+        <sys_update_name>sp_instance_2e5b35d9c3503210f52b9e377d01313b</sys_update_name>
+        <sys_update_version display_value="sp_instance_2e5b35d9c3503210f52b9e377d01313b">2e5b35d9c3503210f52b9e377d01313d</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 19:49:57</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

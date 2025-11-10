@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="221342bcc363a210f52b9e377d013118" label="Genre" max_length="40" name="x_1080820_mvx_genre" type="collection">
+        <element label="TMDb ID" mandatory="true" max_length="40" name="tmdb_id" type="integer"/>
+        <element label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <index name="index" unique="true">
+            <element name="name"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_param_defs">
+    <sys_rest_message_fn_param_defs action="INSERT_OR_UPDATE">
+        <name>api_key</name>
+        <order>100</order>
+        <rest_message_function display_value="Popular Movies">26dd2f90c3a32210f52b9e377d0131c2</rest_message_function>
+        <sys_class_name>sys_rest_message_fn_param_defs</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-20 12:35:56</sys_created_on>
+        <sys_id>9e86e8acc3a72210f52b9e377d013130</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>api_key</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_rest_message_fn_param_defs_9e86e8acc3a72210f52b9e377d013130</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-20 12:37:02</sys_updated_on>
+        <value>2db2aa02babea09edd1802cf35606620</value>
+    </sys_rest_message_fn_param_defs>
+</record_update>

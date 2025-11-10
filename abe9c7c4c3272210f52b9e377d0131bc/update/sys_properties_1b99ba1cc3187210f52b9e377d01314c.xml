@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Defines the maximum number of records (movies) processed per batch during synchronization jobs. &#13;
+This value controls pagination and can be adjusted per environment without requiring code changes. &#13;
+Default is 20.</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_1080820_mvx.tmdb.page_size</name>
+        <read_roles/>
+        <suffix>tmdb.page_size</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-26 11:28:06</sys_created_on>
+        <sys_id>1b99ba1cc3187210f52b9e377d01314c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1080820_mvx.tmdb.page_size</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_properties_1b99ba1cc3187210f52b9e377d01314c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-09-26 11:28:06</sys_updated_on>
+        <type>integer</type>
+        <value>20</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=1b99ba1cc3187210f52b9e377d01314c"/>
+</record_update>

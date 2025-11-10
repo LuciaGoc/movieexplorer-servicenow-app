@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_index">
+    <sys_index action="INSERT_OR_UPDATE">
+        <access_method>btree</access_method>
+        <col_name_string>movie_ref,director_ref</col_name_string>
+        <index_col_name>ca864af0c3a3a210f52b9e377d013160,b8a64af0c3a3a210f52b9e377d013161</index_col_name>
+        <logical_table_name>x_1080820_mvx_movie_director</logical_table_name>
+        <sys_class_name>sys_index</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2025-08-22 08:21:03</sys_created_on>
+        <sys_id>3c9f7901c3632210f52b9e377d013199</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1080820_mvx_movie_director</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_index_x_1080820_mvx_movie_director_movie_ref_director_ref</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2025-08-22 08:21:03</sys_updated_on>
+        <table display_value="Movie Director" name="x_1080820_mvx_movie_director">b5868234c3a3a210f52b9e377d013155</table>
+        <unique_index>true</unique_index>
+    </sys_index>
+</record_update>

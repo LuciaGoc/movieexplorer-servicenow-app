@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1080820_mvx.MovieImporter</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>MovieImporter</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var MovieImporter = Class.create();
+MovieImporter.prototype = {
+    initialize: function() {
+
+        // map of unique keys for upserts
+        this.uniqueKeys = {
+            "x_1080820_mvx_movie": ["tmdb_id"],
+            "x_1080820_mvx_genre": ["tmdb_id"],
+            "x_1080820_mvx_actor": ["tmdb_id"],
+            "x_1080820_mvx_director": ["tmdb_id"],
+            "x_1080820_mvx_movie_title": ["movie_ref", "language", "type"],
+            "x_1080820_mvx_movie_actor": ["movie_ref", "actor_ref"],
+            "x_1080820_mvx_movie_director": ["movie_ref", "director_ref"],
+            "x_1080820_mvx_movie_genre": ["movie_ref", "genre_ref"]
+        };
+    },
+
+    /**
+     * Calls the TMDb (The Movie Database) API with a given endpoint and optional query parameters.
+     * Handles authentication via either API key or Bearer token and parses the JSON response.
+     *
+     * Builds the full request URL safely:
+     *  - trims trailing "/" from baseUrl
+     *  - trims leading "/" from endpoint
+     *  - appends query parameters (if provided)
+     *
+     * @param {string} endpoint - The API endpoint to call (e.g., "movie/550", "person/123").
+     * @param {Object} [params={}] - Optional query parameters as key-value pairs 
+     *                               (e.g., { page: 1, sort_by: "popularity.desc" }).
+     * @returns {Object|null} - Parsed JSON response object from TMDb if request succeeds (HTTP 200).
+     *                          Returns null if no content (HTTP 204), if TMDb responds with an error, 
+     *                          or if an exception occurs.
+     */
+    callTmdb: function(endpoint, params) {
+        var token = gs.getProperty("x_1080820_mvx.tmdb.access_token", "");
+        var apiKey = gs.getProperty("x_1080820_mvx.tmdb.API_key", "");
+        var baseUrl = gs.getProperty("x_1080820_mvx.tmdb.base_url", "https://api.themoviedb.org/3/");
+
+        var url = baseUrl.replace(/\/$/, '') + '/' + endpoint.replace(/^\/+/, '');
+        if (params) {
+            url += "?" + Object.keys(params).map(function(key) {
+                return key + "=" + encodeURIComponent(params[key]);
+            }).join("&");
+        }
+
+        var tmdbRequest = new sn_ws.RESTMessageV2();
+        tmdbRequest.setHttpMethod("GET");
+        tmdbRequest.setEndpoint(url);
+
+        if (token) {
+            tmdbRequest.setRequestHeader("Authorization", "Bearer " + token);
+        } else if (apiKey) {
+            url += (url.indexOf("?") > -1 ? "&" : "?") + "api_key=" + apiKey;
+            tmdbRequest.setEndpoint(url);
+        }
+
+        gs.info("[MovieImporter] Calling endpoint: " + endpoint);
+
+        try {
+            var response = tmdbRequest.execute();
+            var httpStatus = response.getStatusCode();
+            var responseBody = response.getBody();
+
+            if (httpStatus == 200) {
+                return JSON.parse(responseBody);
+            } else if (httpStatus == 204) {
+                gs.warn("[MovieImporter] No content for endpoint " + endpoint);
+                return null;
+            } else {
+                gs.error("[MovieImporter] TMDb error " + httpStatus + ": " + responseBody);
+                return null;
+            }
+        } catch (ex) {
+            gs.error("[MovieImporter] Exception in callTmdb: " + ex.message);
+            return null;
+        }
+    },
+
+    /**
+     * Inserts a new record or updates an existing record in a ServiceNow table 
+     * based on the defined unique key(s) for that table.
+     *
+     * Logic:
+     *  - Looks up existing records using the unique key(s) defined in this.uniqueKeys.
+     *  - If a record exists → updates it with provided field values.
+     *  - If no record exists → inserts a new one.
+     *
+     * @param {string} table - The name of the target table (e.g., "x_1080820_mvx_actor").
+     * @param {Object} record - Key-value pairs representing fields and values to insert or update.
+     *                          Must contain all unique key fields defined for the table.
+     * @returns {string|null} - The Sys ID of the inserted or updated record. 
+     *                          Returns null if unique keys are missing or not defined for the table.
+     *
+     */
+
+    // insertIfNotExists => upsert	
+    upsert: function(table, record) {
+        var gr = new GlideRecord(table);
+        var keys = this.uniqueKeys[table];
+        if (!keys) {
+            gs.error("[MovieImporter] Unique keys not defined for table: " + table);
+            return null;
+        }
+
+        // Add query for each unique key field
+        for (var i = 0; i < keys.length; i++) {
+            var field = keys[i];
+            if (record[field] != null && record[field] !== "") { // TOTO (record[field])
+                gr.addQuery(field, record[field]);
+            } else {
+                gs.error("[MovieImporter] Missing value for unique key '" + field + "' in table " + table);
+                return null;
+            }
+        }
+        gr.query();
+
+        var targetGr;
+        if (gr.next()) {
+            // Update existing record
+            targetGr = gr;
+        } else {
+            // Insert new record
+            targetGr = new GlideRecord(table);
+            targetGr.initialize();
+        }
+
+        // Apply field values (both for insert and update)
+        for (var fieldName in record) {
+            targetGr.setValue(fieldName, record[fieldName]);
+        }
+
+        // Save and return sys_id
+        if (targetGr.isNewRecord()) {
+            return targetGr.insert();
+        } else {
+            targetGr.update();
+            return targetGr.getUniqueValue();
+        }
+    },
+
+    /**
+     * Constructs the full URL for a TMDb image given its path and optional size.
+     *
+     * @param {string} path - The relative path of the image returned by TMDb.
+     * @param {string} [size="w500"] - Optional size specifier (e.g., "w200", "original").
+     * @returns {string} - Full URL to the image, or an empty string if path is not provided.
+     */
+    buildImageUrl: function(path, size) {
+        return path ? "https://image.tmdb.org/t/p/" + (size || "w500") + path : "";
+    },
+
+    /**
+     * Retrieves detailed information about a person (actor/director) from TMDb.
+     * Directly calls the TMDb API.
+     *
+     * @param {string|number} personId - The TMDb ID of the person.
+     * @returns {Object} - JSON object with person details if found, or an empty object if not.
+     */
+    getPersonDetails: function(personId) {
+        return this.callTmdb("person/" + personId, {}) || {};
+    },
+
+    /**
+     * Imports a single movie from TMDb by its ID.
+     * Fetches movie details including credits, then stores or updates the record
+     * in ServiceNow. Related titles, genres, and persons are also imported.
+     *
+     * @param {string|number} movieId - The TMDb ID of the movie to import.
+     * @returns {string|null} - The sys_id of the inserted or updated movie record, 
+     *                          or null if the import failed.
+     */
+    importMovie: function(movieId) {
+        if (!movieId) return null;
+
+        var details = this.callTmdb("movie/" + movieId, {
+            append_to_response: "credits"
+        });
+        if (!details) return null;
+
+        if (!details.poster_path) {
+            gs.warn("[MovieImporter] Movie " + details.title + " has no poster_path");
+        }
+
+        var movieSysId = this.upsert("x_1080820_mvx_movie", {
+            tmdb_id: details.id,
+            title: details.title,
+            original_title: details.original_title,
+            festival_title: details.original_title,
+            release_date: details.release_date,
+            poster_url: this.buildImageUrl(details.poster_path),
+            description: details.overview || "No description available" 
+        });
+
+        this.importMovieTitles(details.id, movieSysId);
+        this.importMovieGenres(details, movieSysId);
+        this.importMoviePersons(details, movieSysId);
+
+        return movieSysId;
+    },
+
+    /**
+     * Imports a batch of movies from TMDb based on pagination.
+     * Fetches movies page by page from TMDb and imports them into ServiceNow.
+     *
+     * Note: TMDb discover API uses "page" (1-based), each containing up to 20 results.
+     * Offset is simulated by skipping items within the fetched page.
+     *
+     * @param {number} limit - Maximum number of movies to import in this batch.
+     * @param {number} offset - The starting index of movies to import across all results.
+     * @returns {void}
+     */
+    importMoviesBatch: function(limit, offset) {
+        var pageSize = 20; // TMDb discover/movie always returns 20 results per page
+        var page = Math.floor(offset / pageSize) + 1;
+        var indexInPage = offset % pageSize;
+
+        var moviesData = this.callTmdb("discover/movie", {
+            sort_by: "popularity.desc",
+            page: page
+        });
+
+        if (!moviesData || !moviesData.results) return;
+
+        var imported = 0;
+        for (var i = indexInPage; i < moviesData.results.length && imported < limit; i++) {
+            this.importMovie(moviesData.results[i].id);
+            imported++;
+        }
+    },
+
+    /**
+     * Imports alternative titles for a movie from TMDb and stores them in ServiceNow.
+     * Each alternative title is normalized into one of the categories:
+     * "official", "alias", or "translated", based on its TMDb type.
+     *
+     * @param {string|number} movieId - The TMDb ID of the movie.
+     * @param {string} movieSysId - The sys_id of the movie record in ServiceNow.
+     * @returns {void}
+     */
+    importMovieTitles: function(movieId, movieSysId) {
+        var result = this.callTmdb("movie/" + movieId + "/alternative_titles", {});
+        if (!result || !result.titles) return;
+
+        var typeMap = {
+            "working title": "alias",
+            "festival title": "alias",
+            "tv title": "alias",
+            "video title": "alias",
+            "short title": "alias",
+            "original title": "official"
+        };
+
+        for (var i = 0; i < result.titles.length; i++) {
+            var alternativeTitle = result.titles[i];
+            var normalizedType = typeMap[alternativeTitle.type && alternativeTitle.type.toLowerCase()] || "translated";
+
+            var record = {
+                movie_ref: movieSysId,
+                title: alternativeTitle.title,
+                language: alternativeTitle.iso_3166_1 || alternativeTitle.iso_639_1 || "xx",
+                type: normalizedType
+            };
+            this.upsert("x_1080820_mvx_movie_title", record);
+        }
+    },
+
+    /**
+     * Imports genres for a movie from TMDb and stores them in ServiceNow.
+     * Each genre is upserted into the genre table, and the relation between
+     * the movie and the genre is also upserted into the movie-genre table.
+     *
+     * @param {Object} details - The TMDb movie details object containing genres.
+     * @param {string} movieSysId - The sys_id of the movie record in ServiceNow.
+     * @returns {void}
+     */
+    importMovieGenres: function(details, movieSysId) {
+        if (!details.genres) return;
+
+        for (var i = 0; i < details.genres.length; i++) {
+            var genre = details.genres[i];
+
+            // upsert genre into genre table (always update name if changed)
+            var genreSysId = this.upsert("x_1080820_mvx_genre", {
+                tmdb_id: genre.id,
+                name: genre.name
+            });
+
+            // upsert movie-genre relation
+            this.upsert("x_1080820_mvx_movie_genre", {
+                movie_ref: movieSysId,
+                genre_ref: genreSysId
+            });
+        }
+    },
+
+    /**
+     * Imports persons (actors and directors) for a movie from TMDb.
+     * Retrieves detailed information for each person and upserts them into
+     * ServiceNow tables. Also maintains the relationship between the movie
+     * and its actors/directors.
+     *
+     * @param {Object} details - The TMDb movie details object, including credits.
+     * @param {string} movieSysId - The sys_id of the movie record in ServiceNow.
+     * @returns {void}
+     */
+    importMoviePersons: function(details, movieSysId) {
+        if (!details.credits) return;
+
+        // --- Actors ---
+        var cast = details.credits.cast || [];
+        for (var i = 0; i < cast.length; i++) {
+            var castMember = cast[i];
+            var actorDetails = this.getPersonDetails(castMember.id);
+
+            // upsert actor into actor table
+            var actorSysId = this.upsert("x_1080820_mvx_actor", {
+                tmdb_id: actorDetails.id,
+                name: actorDetails.name,
+                birth_date: actorDetails.birthday,
+                death_date: actorDetails.deathday,
+                profile_url: this.buildImageUrl(actorDetails.profile_path),
+                biography: actorDetails.biography || "Biography not available"
+            });
+
+            // upsert movie-actor relation
+            this.upsert("x_1080820_mvx_movie_actor", {
+                movie_ref: movieSysId,
+                actor_ref: actorSysId,
+                role_name: castMember.character
+            });
+        }
+
+        // --- Directors ---
+        var crew = details.credits.crew || [];
+        for (var j = 0; j < crew.length; j++) {
+            var crewMember = crew[j];
+            if (crewMember.job === "Director") {
+                var directorDetails = this.getPersonDetails(crewMember.id);
+
+                // upsert director into director table
+                var directorSysId = this.upsert("x_1080820_mvx_director", {
+                    tmdb_id: directorDetails.id,
+                    name: directorDetails.name,
+                    birth_date: directorDetails.birthday,
+                    death_date: directorDetails.deathday,
+                    profile_url: this.buildImageUrl(directorDetails.profile_path),
+                    biography: directorDetails.biography
+                });
+
+                // upsert movie-director relation
+                this.upsert("x_1080820_mvx_movie_director", {
+                    movie_ref: movieSysId,
+                    director_ref: directorSysId
+                });
+            }
+        }
+    },
+
+    type: "MovieImporter"
+};
+
+
+// (function() {
+//     var importer = new MovieImporter();
+
+//     var limit = 3;   
+//     var offset = 0;   
+
+//     gs.info("[BackgroundScript] Starting batch import from offset=" + offset + ", limit=" + limit);
+
+//     importer.importMoviesBatch(limit, offset);
+
+//     gs.info("[BackgroundScript] Batch import finished.");
+// })();]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-22 09:01:24</sys_created_on>
+        <sys_id>1e68820dc3632210f52b9e377d013181</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>MovieImporter</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_script_include_1e68820dc3632210f52b9e377d013181</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-09-22 08:24:20</sys_updated_on>
+    </sys_script_include>
+</record_update>

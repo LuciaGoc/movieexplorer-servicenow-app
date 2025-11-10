@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>TMDb API base URL</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_1080820_mvx.tmdb.base_url</name>
+        <read_roles/>
+        <suffix>tmdb.base_url</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-08-20 08:12:10</sys_created_on>
+        <sys_id>7748a310c3a32210f52b9e377d013179</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1080820_mvx.tmdb.base_url</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_properties_7748a310c3a32210f52b9e377d013179</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-08-20 08:12:10</sys_updated_on>
+        <type>string</type>
+        <value>https://api.themoviedb.org/3</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=7748a310c3a32210f52b9e377d013179"/>
+</record_update>

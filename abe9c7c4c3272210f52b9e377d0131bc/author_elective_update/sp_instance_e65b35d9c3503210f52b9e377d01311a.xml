@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="DELETE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph>tasks</glyph>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">225b35d9c3503210f52b9e377d013115</sp_column>
+        <sp_widget display_value="KB News">ad2326a45b110200e23dc7ad31f91a1e</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-09-29 09:28:10</sys_created_on>
+        <sys_id>e65b35d9c3503210f52b9e377d01311a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>News</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sp_instance_e65b35d9c3503210f52b9e377d01311a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 12:56:29</sys_updated_on>
+        <title>News</title>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="DELETE" query="documentkey=e65b35d9c3503210f52b9e377d01311a"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</application>
+        <file_path/>
+        <instance_id>e6b177f8ebb82e94cbbffceacad0cdc9</instance_id>
+        <instance_name>dev319762</instance_name>
+        <name>sp_instance_e65b35d9c3503210f52b9e377d01311a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance"><sp_instance action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>default</color><css/><glyph>tasks</glyph><id/><order>1</order><roles/><short_description/><size>md</size><sp_column display_value="1">225b35d9c3503210f52b9e377d013115</sp_column><sp_widget display_value="KB News">ad2326a45b110200e23dc7ad31f91a1e</sp_widget><sys_class_name>sp_instance</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-09-29 09:28:10</sys_created_on><sys_id>e65b35d9c3503210f52b9e377d01311a</sys_id><sys_mod_count>2</sys_mod_count><sys_name>News</sys_name><sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package><sys_policy/><sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope><sys_update_name>sp_instance_e65b35d9c3503210f52b9e377d01311a</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-10-03 12:56:29</sys_updated_on><title>News</title><url/><widget_parameters/></sp_instance><sys_translated_text action="delete_multiple" query="documentkey=e65b35d9c3503210f52b9e377d01311a"/></record_update>]]></payload>
+        <payload_hash>1909815393</payload_hash>
+        <record_name>News</record_name>
+        <reverted_from/>
+        <source>23e9c7c4c3272210f52b9e377d0131c1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-03 12:56:30</sys_created_on>
+        <sys_id>09615326c3dc7210f52b9e377d013139</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>199aa2538500000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 12:56:30</sys_updated_on>
+        <type>Instance</type>
+        <update_guid>cd615326bcdc72103fc1679e5c8d1f38</update_guid>
+        <update_guid_history>cd615326bcdc72103fc1679e5c8d1f38:1909815393,3d311fe228dc72100c7c8b5201474def:-1911173982,6e5b35d95e5032100f1c26141b4f481b:1909815393</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="News">7561d76ec39c7210f52b9e377d0131e5</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-03 12:56:33</sys_created_on>
+        <sys_db_object display_value="" name="sp_instance">sp_instance</sys_db_object>
+        <sys_id>632821e702c449aeb88b214cc86cd584</sys_id>
+        <sys_metadata>e65b35d9c3503210f52b9e377d01311a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>News</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_scope_delete display_value="">b4818d0ec64c4b90938e43429105b100</sys_scope_delete>
+        <sys_update_name>sp_instance_e65b35d9c3503210f52b9e377d01311a</sys_update_name>
+        <sys_update_version display_value="sp_instance_e65b35d9c3503210f52b9e377d01311a">09615326c3dc7210f52b9e377d013139</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-03 12:56:33</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
