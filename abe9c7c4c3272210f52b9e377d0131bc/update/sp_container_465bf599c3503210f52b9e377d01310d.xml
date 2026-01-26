@@ -4,7 +4,7 @@
         <background_image>e696b6d3c3187610f52b9e377d0131ce</background_image>
         <background_style>cover</background_style>
         <bootstrap_alt>false</bootstrap_alt>
-        <class_name>hidden-xs</class_name>
+        <class_name/>
         <container_class_name/>
         <name>Movie Explorer Portal - Container 2</name>
         <order>2</order>
@@ -15,14 +15,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-09-29 09:28:09</sys_created_on>
         <sys_id>465bf599c3503210f52b9e377d01310d</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>Movie Explorer Portal - Container 2</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_container_465bf599c3503210f52b9e377d01310d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-10-05 19:01:05</sys_updated_on>
+        <sys_updated_on>2026-01-13 14:54:21</sys_updated_on>
         <title/>
         <width>container</width>
     </sp_container>

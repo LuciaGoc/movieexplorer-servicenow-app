@@ -6,67 +6,38 @@
     gs.info("Movie Explorer Table Search called with query: " + query);
 
     var results = [];
-    var tables = [{
-            name: 'x_1080820_mvx_movie',
-            searchFields: ['title', 'original_title', 'festival_title']
-        },
-        {
-            name: 'x_1080820_mvx_movie_title',
-            searchFields: ['language', 'title', 'movie_ref']
-        },
-        {
-            name: 'x_1080820_mvx_genre',
-            searchFields: ['name']
-        },
-        {
-            name: 'x_1080820_mvx_director',
-            searchFields: ['name']
-        },
-        {
-            name: 'x_1080820_mvx_actor',
-            searchFields: ['name', 'character']
-        },
-        {
-            name: 'x_1080820_mvx_review',
-            searchFields: ['comment']
-        }
-    ];
 
-    tables.forEach(function(tbl) {
-        var gr = new GlideRecord(tbl.name);
-        if (!gr.isValid()) return; // skontroluje, či tabuľka existuje
+    var gr = new GlideRecord('x_1080820_mvx_movie');
+    if (!gr.isValid()) { // skontroluje, či tabuľka existuje
+        return results;
+    }
+	var searchFields = ['title', 'original_title', 'festival_title'];
 
-        var validFields = tbl.searchFields.filter(function(fld) {
-            return gr.isValidField(fld); // necháme len existujúce stĺpce
+    var queryStr = searchFields.map(function(field) {
+        return field + "LIKE" + query;
+    }).join("^OR");
+
+    gr.addEncodedQuery(queryStr);
+
+    //gr.addNotNullQuery('poster_url');
+    gr.addNotNullQuery('description');
+	gr.orderByDesc('release_date');
+	gr.setLimit(10);
+ 
+    gr.query();
+
+    while (gr.next()) {
+        results.push({
+            table: 'x_1080820_mvx_movie',
+            sys_id: gr.getValue('sys_id'),
+            title: gr.getValue('title'),
+            release_date: gr.getValue('release_date'),
+            poster_url: gr.getValue('poster_url'),
+            description: gr.getValue('description'),
+
+			url: '?id=movie_detail&sys_id=' + gr.getValue('sys_id')
         });
-
-        if (validFields.length === 0) return; // ak nie sú žiadne platné polia, preskočíme
-
-        if (validFields.length > 0) {
-            // vytvorenie encoded query typu "field1LIKEquery^ORfield2LIKEquery^OR..."
-            var queryStr = validFields.map(function(f) {
-                return f + "LIKE" + query;
-            }).join("^OR");
-            gr.addEncodedQuery(queryStr);
-        }
-
-
-        gr.query();
-        while (gr.next()) {
-            var fieldsArr = validFields.map(function(fld) {
-                return {
-                    label: fld,
-                    display_value: gr.getValue(fld)
-                };
-            });
-            results.push({
-                table: tbl.name,
-                sys_id: gr.getValue('sys_id'),
-                primary: gr.getValue(validFields[0]),
-                fields: fieldsArr
-            });
-        }
-    });
+    }
 
     return results;
 })(query);]]></data_fetch_script>
@@ -85,7 +56,7 @@
         <pagination_supported>true</pagination_supported>
         <primary_display_field/>
         <roles/>
-        <search_page_template><![CDATA[<div>
+        <search_page_template><![CDATA[<!--div>
   <a href="?id=form&sys_id={{item.sys_id}}&table={{item.table}}" class="h4 text-primary m-b-sm block">
     <span ng-bind-html="highlight(item.primary, data.q)"></span>
   </a>
@@ -93,20 +64,117 @@
     <span class="m-l-xs m-r-xs" ng-if="!$first"> &middot; </span>
     {{f.label}}: <span ng-bind-html="highlight(f.display_value, data.q)"></span>
   </span>
-</div>]]></search_page_template>
+</div-->
+
+<div class="movie-card">
+  <!-- Klikatelny poster -->
+  <a ng-href="{{item.url}}" class="movie-poster">
+    <img ng-src="{{item.poster_url}}" alt="{{item.title}}">
+  </a>
+
+  <!-- Textovy obsah -->
+  <div class="movie-text">
+
+    <!-- Klikateľný názov filmu -->
+    <a ng-href="{{item.url}}" class="h4 text-primary movie-title">
+      <span ng-bind-html="highlight(item.title, data.q)"></span>
+    </a>
+
+    <!-- Datum vydania -->
+    <div ng-if="item.release_date" class="movie-release-date">
+      {{ item.release_date | date:'MMMM d, yyyy' }}
+    </div>
+
+    <!-- Wrapper pre popis -->
+    <p class="movie-description" ng-bind-html="item.description"></p>
+  </div>
+</div>
+
+<!-- responzivne CSS -->
+<style>
+  /* Kontajner pre kartu filmu */
+  .movie-card {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    align-items: flex-start;
+  }
+
+  .movie-poster {
+    flex: 0 0 92px;
+    margin-right: 10px;
+  }
+
+  .movie-poster img {
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  .movie-text {
+    flex: 1 1 0;
+    min-width: 150px;
+  }
+
+  .movie-title {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 14px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .movie-release-date {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  /* Popis - defaultne 3 riadky */
+  .movie-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 2px 0;
+    color: #555;
+    font-size: 12px;
+    line-height: 1.2em;
+  }
+
+  /* Pri strednych obrazovkach: 2 riadky */
+  @media (max-width: 600px) {
+    .movie-description {
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  /* Pri malych obrazovkach: 1 riadok */
+  @media (max-width: 400px) {
+    .movie-description {
+      -webkit-line-clamp: 1;
+    }
+
+    .movie-card img {
+      width: 70px;
+    }
+  }
+</style>]]></search_page_template>
         <source_table>x_1080820_mvx_movie</source_table>
         <sys_class_name>sp_search_source</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-10-03 13:38:21</sys_created_on>
         <sys_id>57d7972ec3dc7210f52b9e377d013182</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>Movie Explorer Table Search</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_search_source_57d7972ec3dc7210f52b9e377d013182</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-10-03 18:35:38</sys_updated_on>
+        <sys_updated_on>2026-01-14 11:48:32</sys_updated_on>
         <typeahead_glyph>empty</typeahead_glyph>
         <typeahead_template/>
     </sp_search_source>

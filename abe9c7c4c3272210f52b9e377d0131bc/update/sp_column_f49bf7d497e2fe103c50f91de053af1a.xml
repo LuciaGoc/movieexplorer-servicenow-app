@@ -3,22 +3,22 @@
         <class_name/>
         <order>1</order>
         <semantic_tag/>
-        <size>12</size>
-        <size_lg>12</size_lg>
-        <size_sm>12</size_sm>
-        <size_xs>12</size_xs>
-        <sp_row display_value="1">165bf1d9c3503210f52b9e377d0131dc</sp_row>
+        <size/>
+        <size_lg/>
+        <size_sm/>
+        <size_xs/>
+        <sp_row display_value="1">f49bf7d497e2fe103c50f91de053af16</sp_row>
         <sys_class_name>sp_column</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2025-09-29 09:28:09</sys_created_on>
-        <sys_id>925bf1d9c3503210f52b9e377d0131df</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_created_on>2026-01-16 12:35:45</sys_created_on>
+        <sys_id>f49bf7d497e2fe103c50f91de053af1a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
         <sys_name>1</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
-        <sys_update_name>sp_column_925bf1d9c3503210f52b9e377d0131df</sys_update_name>
+        <sys_update_name>sp_column_f49bf7d497e2fe103c50f91de053af1a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-01-13 14:47:26</sys_updated_on>
+        <sys_updated_on>2026-01-16 12:35:45</sys_updated_on>
     </sp_column>
 </record_update>
