@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_theme">
+    <sp_theme action="INSERT_OR_UPDATE">
+        <css_variables>/* ===================================================== */
+/* MOVIE EXPLORER – GLOBAL THEME OVERRIDE              */
+/* TMDB Inspired Design                                */
+/* ===================================================== */
+
+/* ====== Theme Variables ====== */
+:root {				/* globalne premenne */
+  /* Brand Colors */
+  --primary-color: #01B4E4;
+  --secondary-color: #01D277;
+  --success-color: #90CEA1;
+  --warning-color: #F5C518;
+  --danger-color: #D9534F;
+
+  /* Backgrounds */
+  /*--body-bg: #0D253F; */
+  /*--sp-homepage-bg: #0D253F;*/
+  --panel-bg: #081C2F;
+  --footer-bg: #081C2F;
+
+  /* Text */
+  --text-color: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --link-color: #01B4E4;
+
+  /* Navbar */
+  --navbar-bg: #032541;
+  --navbar-link-color: rgba(255, 255, 255, 0.8);
+  --navbar-link-hover-color: #FFFFFF;
+
+  /* Buttons */
+  --btn-bg: #01B4E4;
+  --btn-color: #FFFFFF;
+
+  /* Panels / Cards */
+  --panel-radius: 6px;
+
+  /* Typography */
+  --font-size-base: 16px;
+  --headings-color: #FFFFFF;
+  --tagline-color: rgba(255, 255, 255, 0.7);
+
+  /* Focus outline for accessibility */
+  --focus-outline-color: #01B4E4;
+}</css_variables>
+        <footer/>
+        <footer_fixed>true</footer_fixed>
+        <header/>
+        <matching_now_experience_theme/>
+        <name>Movie Explorer Theme</name>
+        <navbar_fixed>true</navbar_fixed>
+        <sys_class_name>sp_theme</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-08 10:05:06</sys_created_on>
+        <sys_id>fe9535339732f6103c50f91de053af6f</sys_id>
+        <sys_mod_count>52</sys_mod_count>
+        <sys_name>Movie Explorer Theme</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sp_theme_fe9535339732f6103c50f91de053af6f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-27 12:55:52</sys_updated_on>
+        <turn_off_scss_compilation>false</turn_off_scss_compilation>
+    </sp_theme>
+</record_update>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/*.movie-grid {&#13;
+  display: flex;&#13;
+  flex-wrap: wrap;&#13;
+  gap: 10px; &#13;
+}&#13;
+&#13;
+.movie-item {&#13;
+  width: 120px; &#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.movie-item img {&#13;
+  width:100%;&#13;
+  height: auto;&#13;
+  border-radius: 4px;&#13;
+}*/&#13;
+&#13;
+.movie-grid {&#13;
+  display: grid;&#13;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));&#13;
+  gap: 10px;&#13;
+}&#13;
+&#13;
+.movie-item {&#13;
+  text-align: center;&#13;
+}&#13;
+&#13;
+.movie-item img {&#13;
+  width: 100%;&#13;
+  height: auto;&#13;
+  border-radius: 4px;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>movie_lists_widget</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Movie Lists Widget</name>
+        <option_schema>[&#13;
+  {&#13;
+    "name": "type",&#13;
+    "label": "Movie type",&#13;
+    "type": "string"&#13;
+  }&#13;
+]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    data.movies = [];
+    var gr = new GlideRecord('x_1080820_mvx_movie');
+
+    if (options.type == "top_rated") {
+        gr.orderByDesc('tmdb_rating');
+        data.title = "Top Rated";
+    } else if (options.type == "newest") {
+        gr.orderByDesc('release_date');
+        data.title = "Newest";
+    }
+    gr.query();
+
+    while (gr.next() && data.movies.length < 8) {
+        data.movies.push({
+            title: gr.title.toString(),
+            poster: gr.poster_url.toString(),
+            release: gr.release_date.toString(),
+
+			titleK: gr.getValue('title'),
+            poster_urlK: gr.getValue('poster_url'),
+
+			url: '?id=movie_detail&sys_id=' + gr.getValue('sys_id')
+        });
+    }
+	data.q = $sp.getParameter('q'); // search text zo search page
+	
+	return data.movies;
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-02-23 07:27:31</sys_created_on>
+        <sys_id>cd216e28975372503c50f91de053afde</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>Movie Lists Widget</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sp_widget_cd216e28975372503c50f91de053afde</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-02-28 13:02:51</sys_updated_on>
+        <template><![CDATA[<h3>{{data.title}}</h3>
+
+<div class="movie-grid">
+  <div class="movie-item" ng-repeat="movie in data.movies">
+
+    <!-- Klikatelny poster -->
+    <a ng-href="{{movie.url}}" class="movie-poster">
+      <img ng-src="{{movie.poster_urlK}}" alt="{{movie.title}}">
+    </a>
+
+    <!-- Klikatelny title-->
+    <a ng-href="{{movie.url}}" class="movie-title">
+      {{movie.title}}
+    </a>
+
+    <p>{{movie.release}}</p>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

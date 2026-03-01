@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>other</category>
-        <client_script><![CDATA[api.controller=function() {  /* widget controller */  var c = this;};]]></client_script>
+        <client_script><![CDATA[api.controller = function() {
+  var c = this;
+  // widget HTML sa načíta automaticky cez <sp-widget widget="me_header">
+};]]></client_script>
         <controller_as>c</controller_as>
-        <css>.hero-search {
-  padding: 80px 20px 100px;
-}
-
-.hero-title {
-  font-size: 48px;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 20px;
-}
-
-.hero-subtitle {
-  font-size: 22px;
-  color: white;
-  margin-bottom: 40px;
-}
-
-.hero-search-box {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 32px;
-  }
-
-  .hero-subtitle {
-    font-size: 18px;
-  }
-
-  .hero-search-box {
-    max-width: 100%;
-  }
-}</css>
+        <css>/*.hero-search {&#13;
+  padding: 80px 20px 100px;&#13;
+}&#13;
+&#13;
+.hero-title {&#13;
+  font-size: 48px;&#13;
+  font-weight: 600;&#13;
+  color: white;&#13;
+  margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.hero-subtitle {&#13;
+  font-size: 22px;&#13;
+  color: white;&#13;
+  margin-bottom: 40px;&#13;
+}&#13;
+&#13;
+.hero-search-box {&#13;
+  max-width: 700px;&#13;
+  margin: 0 auto;&#13;
+}&#13;
+&#13;
+/* Mobile */ &#13;
+@media (max-width: 768px) {&#13;
+  .hero-title {&#13;
+    font-size: 32px;&#13;
+  }&#13;
+&#13;
+  .hero-subtitle {&#13;
+    font-size: 18px;&#13;
+  }&#13;
+&#13;
+  .hero-search-box {&#13;
+    max-width: 100%;&#13;
+  }&#13;
+}&#13;
+</css>
         <data_table>sp_instance_ais</data_table>
         <demo_data/>
         <description>Custom homepage search widget for Movie Explorer Portal with links to movie_detail page.</description>
@@ -70,15 +74,18 @@ if (aisEnabled) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-01-13 14:19:32</sys_created_on>
         <sys_id>f386f4af97123a103c50f91de053aff5</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>Homepage Search MEP</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_widget_f386f4af97123a103c50f91de053aff5</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-01-13 14:49:00</sys_updated_on>
-        <template><![CDATA[<div id="homepage-search" class="hero-search">
+        <sys_updated_on>2026-02-27 14:41:36</sys_updated_on>
+        <template><![CDATA[<!-- ME Header -->
+<sp-widget widget="me_header"></sp-widget>
+
+<div id="homepage-search" class="hero-search">
   <div class="container text-center">
 
     <h1 class="hero-title" ng-bind="options.title"></h1>
