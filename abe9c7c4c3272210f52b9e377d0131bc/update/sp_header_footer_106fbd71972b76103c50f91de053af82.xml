@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>me_header_footer</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>ME Header</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <static>false</static>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-03-11 12:27:24</sys_created_on>
+        <sys_id>106fbd71972b76103c50f91de053af82</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>ME Header</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sp_header_footer_106fbd71972b76103c50f91de053af82</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-03-13 10:16:42</sys_updated_on>
+        <template><![CDATA[<div class="me-header-container header">
+
+  <!-- LEFT: LOGO -->
+  <div class="me-header-left">
+    <a href="/mep">
+      <img src="/sys_attachment.do?sys_id=fd34c87a97d3f2103c50f91de053af32"
+           alt="Movie Explorer Logo">
+    </a>
+  </div>
+  <!-- CENTER: NAVIGATION -->
+  <div class="me-header-center">
+    <nav class="me-header-nav">
+      <a href="/mep" class="active">Movies</a>
+      <a href="#">People</a>
+      <a href="#">Genres</a>
+      <a href="#">Reviews</a>
+
+      <div class="dropdown">
+        <a href="javascript:void(0)">More ▼</a>
+
+        <div class="dropdown-content">
+          <a href="javascript:void(0)">TV Shows</a>
+          <a href="javascript:void(0)">Awards</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- RIGHT: SEARCH -->
+  <div class="me-header-right">
+    <input
+      id="me-header-search-input"
+      type="text"
+      placeholder="Search movies..."
+      class="me-search-input">
+
+    <button
+      id="me-header-search-btn"
+      class="me-search-btn">
+      Search
+    </button>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+
+  console.log('ME header script loaded');
+
+  function runMovieSearch() {
+    console.log('runMovieSearch called');
+
+    var input = document.getElementById('me-header-search-input');
+
+    if (!input) return;
+
+    var q = (input.value || '').trim();
+
+    if (!q) return;
+
+    window.location.href =
+      '/mep?id=search&q=' + encodeURIComponent(q);
+  }
+
+  setTimeout(function() {
+
+    var input = document.getElementById('me-header-search-input');
+    var btn = document.getElementById('me-header-search-btn');
+
+    if (btn) {
+      btn.addEventListener('click', runMovieSearch);
+    }
+
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          runMovieSearch();
+        }
+      });
+    }
+
+  }, 100);
+
+})();
+</script>]]></template>
+    </sp_header_footer>
+</record_update>

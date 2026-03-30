@@ -6,10 +6,19 @@
   var c = this;
 };]]></client_script>
         <controller_as>c</controller_as>
-        <css>/* Zruší overlay pre poster obrázok */&#13;
-.movie-hero-tmdb .movie-poster-tmdb {&#13;
-    position: relative;  /* zabezpečí, že poster bude nad overlay */&#13;
-    z-index: 5;          /* vyššie než overlay */&#13;
+        <css>/* Malý poster – ako v Table Search */&#13;
+.movie-poster img {&#13;
+    width: 150px;      /* nastavíš podľa potreby */&#13;
+    height: auto;       /* zachová proporcie */&#13;
+    border-radius: 6px; /* pekný zaoblený roh */&#13;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* jemný tieň */&#13;
+    display: block;&#13;
+    margin: 0 auto;    /* centrovanie v kolónke */&#13;
+}&#13;
+&#13;
+/* Odstrániť pôvodný hero styling */&#13;
+.movie-poster-tmdb {&#13;
+    display: none !important;&#13;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -52,14 +61,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-01-14 12:12:54</sys_created_on>
         <sys_id>c113a1fb9716ba103c50f91de053af80</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>Movie Detail Widget</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_widget_c113a1fb9716ba103c50f91de053af80</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-02-08 14:18:42</sys_updated_on>
+        <sys_updated_on>2026-03-02 09:23:21</sys_updated_on>
         <template><![CDATA[<div class="movie-hero-tmdb" ng-if="data.movie">
     <div class="movie-hero-overlay">
         <!-- Bootstrap kontajner -->
@@ -69,11 +78,12 @@
 
                 <!-- LEFT POSTER -->
                 <div class="col-md-3">
-                    <img
-            ng-if="data.movie.posterUrl"
-            ng-src="{{data.movie.posterUrl}}"
-            alt="{{data.movie.title}}"
-            class="movie-poster-tmdb">
+                    <a ng-href="{{data.movie.url}}" class="movie-poster">
+                        <img
+                            ng-if="data.movie.posterUrl"
+                            ng-src="{{data.movie.posterUrl}}"
+                            alt="{{data.movie.title}}">
+                    </a>
                 </div>
 
                 <!-- INFO -->
