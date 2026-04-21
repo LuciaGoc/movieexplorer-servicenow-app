@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="e7b506b0c3a3a210f52b9e377d013156" label="User Favorite Movie" max_length="40" name="x_1080820_mvx_user_favorite_movie" type="collection">
-        <element label="Added on" max_length="40" name="added_on" type="glide_date_time"/>
-        <element label="Movie_ref" max_length="40" name="movie_ref" reference="x_1080820_mvx_movie" type="string"/>
         <element label="Reminder on" max_length="40" name="reminder_on" type="glide_date_time"/>
-        <element label="User_ref" max_length="32" name="user_ref" reference="sys_user" type="string"/>
+        <element label="User_ref" max_length="32" name="user_ref" reference="sys_user" type="reference"/>
+        <element label="Added on" max_length="40" name="added_on" type="glide_date_time"/>
+        <element label="Movie_ref" max_length="40" name="movie_ref" reference="x_1080820_mvx_movie" type="reference"/>
         <index name="index" unique="true">
             <element name="user_ref"/>
             <element name="movie_ref"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="efc846f4c3a3a210f52b9e377d0131cc" label="Movie Actor" max_length="40" name="x_1080820_mvx_movie_actor" type="collection">
-        <element label="Movie_ref" mandatory="true" max_length="32" name="movie_ref" reference="x_1080820_mvx_movie" type="string"/>
         <element label="Role Name" max_length="255" name="role_name" type="string"/>
-        <element label="Actor_ref" mandatory="true" max_length="32" name="actor_ref" reference="x_1080820_mvx_actor" type="string"/>
+        <element label="Actor_ref" mandatory="true" max_length="32" name="actor_ref" reference="x_1080820_mvx_actor" type="reference"/>
+        <element label="Movie_ref" mandatory="true" max_length="32" name="movie_ref" reference="x_1080820_mvx_movie" type="reference"/>
         <index name="index" unique="true">
             <element name="movie_ref"/>
             <element name="actor_ref"/>

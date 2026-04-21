@@ -2,38 +2,38 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[api.controller = function() {
-  /* widget controller */
-  var c = this;
+    /* widget controller */
+    var c = this;
 
-  // počkaj, kým sa DOM widgetu načíta
-  c.$onInit = function() {
-    // koreň elementu widgetu
-    var rootEl = c.$element[0];
+    // počkaj, kým sa DOM widgetu načíta
+    c.$onInit = function() {
+        // koreň elementu widgetu
+        var rootEl = c.$element[0];
 
-    // nájdi input a button
-    var input = rootEl.querySelector('.me-search-input');
-    var btn = rootEl.querySelector('.me-search-btn');
+        // nájdi input a button
+        var input = rootEl.querySelector('.me-search-input');
+        var btn = rootEl.querySelector('.me-search-btn');
 
-    // pridaj klik event na tlačidlo
-    if (btn && input) {
-      btn.addEventListener('click', function() {
-        var query = input.value.trim();
-        if (query) {
-          // presmerovanie na stránku s výsledkami (prípadne API call)
-          window.location.href = '/search_results_mep?query=' + encodeURIComponent(query);
-        } else {
-          alert('Please enter a search term.');
+        // pridaj klik event na tlačidlo
+        if (btn && input) {
+            btn.addEventListener('click', function() {
+                var query = input.value.trim();
+                if (query) {
+                    // presmerovanie na stránku s výsledkami (prípadne API call)
+                    window.location.href = '/search_results_mep?query=' + encodeURIComponent(query);
+                } else {
+                    alert('Please enter a search term.');
+                }
+            });
+
+            // umožni vyhľadávať aj po stlačení Enter
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    btn.click();
+                }
+            });
         }
-      });
-
-      // umožni vyhľadávať aj po stlačení Enter
-      input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          btn.click();
-        }
-      });
-    }
-  };
+    };
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>.me-header-container {&#13;
@@ -134,13 +134,11 @@
         <link><![CDATA[function link(scope, element, attrs, controller) {
   
 }]]></link>
-        <name>ME Header</name>
+        <name>ME Header_neaktivny</name>
         <option_schema/>
         <public>true</public>
         <roles/>
         <script><![CDATA[(function() {
-  //data.logoUrl = $sp.getAttachmentURL("me_header", "ME logo2.png");
-  //data.logoUrl = 'https://dev351410.service-now.com/sys_attachment.do?sys_id=ff7173679743ba103c50f91de053afb6&view=true';
   data.logoUrl = "/sys_attachment.do?sys_id=fd34c87a97d3f2103c50f91de053af32";
 })();]]></script>
         <servicenow>false</servicenow>
@@ -148,14 +146,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-02-20 10:44:01</sys_created_on>
         <sys_id>ff7173679743ba103c50f91de053afb6</sys_id>
-        <sys_mod_count>27</sys_mod_count>
-        <sys_name>ME Header</sys_name>
+        <sys_mod_count>33</sys_mod_count>
+        <sys_name>ME Header_neaktivny</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_widget_ff7173679743ba103c50f91de053afb6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-03-12 09:34:02</sys_updated_on>
+        <sys_updated_on>2026-04-20 12:55:59</sys_updated_on>
         <template><![CDATA[<div class="me-header-container header">
   <div class="me-header-left">
     <a href="/mep">
@@ -165,10 +163,10 @@
 
   <div class="me-header-center">
     <nav class="me-header-nav">
-      <a href="javascript:void(0)" class="active">Movies</a>
-      <a href="javascript:void(0)">Actors</a>
-      <a href="javascript:void(0)">Genres</a>
-      <a href="javascript:void(0)">Reviews</a>
+      <!--a href="javascript:void(0)" class="active">Movies</a>
+      <a href="javascript:void(0)" class="active">Actors</a>
+      <a href="javascript:void(0)" class="active">Genres</a>
+      <a href="javascript:void(0)" class="active">Reviews</a-->
       <div class="dropdown">
         <a href="javascript:void(0)">More ▼</a>
         <div class="dropdown-content">

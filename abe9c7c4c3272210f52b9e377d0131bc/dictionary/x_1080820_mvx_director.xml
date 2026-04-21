@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="84340230c3a3a210f52b9e377d01313d" label="Director" max_length="40" name="x_1080820_mvx_director" type="collection">
-        <element label="Birth Date" max_length="40" name="birth_date" type="glide_date"/>
-        <element label="Death Date" max_length="40" name="death_date" type="glide_date"/>
-        <element label="Biography" max_length="5000" name="biography" type="string_full_utf8"/>
         <element label="Profile URL" max_length="255" name="profile_url" type="string"/>
-        <element label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element label="Birth Date" max_length="40" name="birth_date" type="glide_date"/>
+        <element display="true" label="Name" mandatory="true" max_length="100" name="name" type="string"/>
+        <element label="Death Date" max_length="40" name="death_date" type="glide_date"/>
         <element label="TMDb ID" max_length="40" name="tmdb_id" type="integer"/>
+        <element label="Biography" max_length="5000" name="biography" type="string_full_utf8"/>
         <index name="index" unique="true">
             <element name="name"/>
         </index>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="b5868234c3a3a210f52b9e377d013155" label="Movie Director" max_length="40" name="x_1080820_mvx_movie_director" type="collection">
-        <element label="Director_ref" max_length="32" name="director_ref" reference="x_1080820_mvx_director" type="string"/>
-        <element label="Movie_ref" max_length="32" name="movie_ref" reference="x_1080820_mvx_movie" type="string"/>
+        <element label="Director_ref" max_length="32" name="director_ref" reference="x_1080820_mvx_director" type="reference"/>
+        <element label="Movie_ref" max_length="32" name="movie_ref" reference="x_1080820_mvx_movie" type="reference"/>
         <index name="index" unique="true">
             <element name="movie_ref"/>
             <element name="director_ref"/>

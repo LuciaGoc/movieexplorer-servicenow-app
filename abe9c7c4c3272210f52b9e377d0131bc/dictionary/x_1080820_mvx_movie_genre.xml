@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="d34586b0c3a3a210f52b9e377d0131a0" label="Movie Genre" max_length="40" name="x_1080820_mvx_movie_genre" type="collection">
-        <element label="Genre_ref" max_length="40" name="genre_ref" reference="x_1080820_mvx_genre" type="string"/>
-        <element label="Movie_ref" max_length="40" name="movie_ref" reference="x_1080820_mvx_movie" type="string"/>
+        <element label="Movie_ref" max_length="40" name="movie_ref" reference="x_1080820_mvx_movie" type="reference"/>
+        <element label="Genre_ref" max_length="40" name="genre_ref" reference="x_1080820_mvx_genre" type="reference"/>
         <index name="index">
             <element name="genre_ref"/>
             <element name="movie_ref"/>

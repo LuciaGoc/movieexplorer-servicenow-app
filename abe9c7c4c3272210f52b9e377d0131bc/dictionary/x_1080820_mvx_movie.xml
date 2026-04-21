@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="8b86b9bcc323a210f52b9e377d01312f" label="Movie" max_length="40" name="x_1080820_mvx_movie" type="collection">
-        <element label="Poster URL" max_length="255" name="poster_url" type="string"/>
-        <element label="TMDb ID" mandatory="true" max_length="40" name="tmdb_id" type="integer"/>
-        <element label="Title" mandatory="true" max_length="255" name="title" type="string"/>
         <element label="Release Date" max_length="40" name="release_date" type="glide_date"/>
+        <element label="Poster URL" max_length="255" name="poster_url" type="string"/>
         <element label="Festival Title" max_length="255" name="festival_title" type="string"/>
+        <element label="TMDb ID" mandatory="true" max_length="40" name="tmdb_id" type="integer"/>
         <element label="Original Title" max_length="255" name="original_title" type="string"/>
+        <element label="Title" mandatory="true" max_length="255" name="title" type="string"/>
         <element label="Description" max_length="5000" name="description" type="string_full_utf8"/>
         <index name="index" unique="true">
             <element name="tmdb_id"/>

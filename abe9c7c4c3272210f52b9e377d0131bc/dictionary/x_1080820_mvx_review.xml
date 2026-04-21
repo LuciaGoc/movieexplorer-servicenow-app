@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="5aa7ca74c3a3a210f52b9e377d0131fd" label="Review" max_length="40" name="x_1080820_mvx_review" type="collection">
-        <element label="User_ref" mandatory="true" max_length="40" name="user_ref" reference="sys_user" type="string"/>
-        <element label="Comment" max_length="4000" name="comment" type="string_full_utf8"/>
         <element label="Rating" mandatory="true" max_length="40" name="rating" type="integer"/>
-        <element label="Movie_ref" mandatory="true" max_length="40" name="movie_ref" reference="x_1080820_mvx_movie" type="string"/>
+        <element label="Movie_ref" mandatory="true" max_length="40" name="movie_ref" reference="x_1080820_mvx_movie" type="reference"/>
         <element default="gs.nowDateTime()" label="Created on" mandatory="true" max_length="40" name="created_on" type="glide_date_time"/>
+        <element label="User_ref" mandatory="true" max_length="40" name="user_ref" reference="sys_user" type="reference"/>
+        <element label="Comment" max_length="4000" name="comment" type="string_full_utf8"/>
         <index name="index" unique="true">
             <element name="movie_ref"/>
             <element name="user_ref"/>
