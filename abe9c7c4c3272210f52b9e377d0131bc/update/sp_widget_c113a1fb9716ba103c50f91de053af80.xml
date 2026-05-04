@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[api.controller=function() {
-  /* widget controller */
-  var c = this;
+        <client_script><![CDATA[api.controller = function() {
+    var c = this;
+
+    if (c.data.movie.hasUserRating) {
+        c.data.selectedRating = c.data.movie.currentUserRating;
+    }
+
+    c.saveRating = function() {
+
+        if (!c.data.selectedRating) {
+            alert('nevybral si rating')
+            return;
+        }
+        c.server.get({
+                action: "saveRating",
+                rating: c.data.selectedRating
+            })
+            .then(function(response) {
+                location.reload();
+            });
+    };
 };]]></client_script>
         <controller_as>c</controller_as>
         <css>/* Malý poster – ako v Table Search */&#13;
@@ -99,6 +117,156 @@
     if (!sysId)
         return;
 
+    var movieGr = new GlideRecord('x_1080820_mvx_movie');
+    if (!movieGr.get(sysId))
+        return;
+
+    var userId = gs.getUserID();
+    var userName = gs.getUserName();
+
+    data.movie = {
+        title: movieGr.getValue('title'),
+        originalTitle: movieGr.getValue('original_title'),
+        festivalTitle: movieGr.getValue('festival_title'),
+        releaseDate: movieGr.getValue('release_date'),
+        description: movieGr.getValue('description'),
+        posterUrl: movieGr.getValue('poster_url'),
+        tmdbId: movieGr.getValue('tmdb_id'),
+        genres: [],
+        actors: [],
+        directors: [],
+        averageRating: 0,
+        ratingCount: 0,
+        currentUserRating: '',
+        hasUserRating: false,
+        isLoggedIn: userName !== 'guest',
+        currentReviewId: ''
+    };
+
+    function getUserReview(movieId, userId) {
+        var reviewGr = new GlideRecord('x_1080820_mvx_review');
+        reviewGr.addQuery('movie_ref', movieId);
+        reviewGr.addQuery('user_ref', userId);
+        reviewGr.query();
+
+        if (reviewGr.next()) {
+            return {
+                rating: parseInt(reviewGr.getValue('rating'), 10),
+                reviewId: reviewGr.getValue('sys_id')
+            };
+        }
+
+        return null;
+    }
+
+    function saveRating(movieId, userId, rating) {
+        var reviewGr = new GlideRecord('x_1080820_mvx_review');
+        reviewGr.addQuery('movie_ref', movieId);	//('movie_ref', sysId)
+        reviewGr.addQuery('user_ref', userId);
+        reviewGr.query();
+
+        if (reviewGr.next()) {
+            reviewGr.setValue('rating', rating);
+            reviewGr.update();
+        } else {
+            reviewGr.initialize();
+            reviewGr.setValue('movie_ref', movieId);	//('movie_ref', sysId)
+            reviewGr.setValue('user_ref', userId);
+            reviewGr.setValue('rating', rating);
+            reviewGr.insert();
+        }
+    }
+
+    function getRelatedRecordsByMovie(table, transformFunction, targetArray) {
+        var relatedGr = new GlideRecord(table);
+        relatedGr.addQuery('movie_ref', sysId);
+        relatedGr.query();
+
+        while (relatedGr.next()) {
+            targetArray.push(transformFunction(relatedGr));
+        }
+    }
+
+    function getAverageRating(movieId) {
+        var reviewGr = new GlideRecord('x_1080820_mvx_review');
+        reviewGr.addQuery('movie_ref', movieId);
+        reviewGr.query();
+
+        var result = {
+            ratingSum: 0,
+            ratingCount: 0,
+            averageRating: 0
+        };
+
+        while (reviewGr.next()) {
+            var rating = parseInt(reviewGr.getValue('rating'), 10);
+            result.ratingSum += rating;
+            result.ratingCount++;
+        }
+
+        if (result.ratingCount > 0) {
+            result.averageRating = (result.ratingSum / result.ratingCount).toFixed(1);
+        }
+
+        return result;
+    }
+
+    if (input && input.action == 'saveRating' && data.movie.isLoggedIn) {
+        saveRating(sysId, userId, input.rating);
+    }
+
+    getRelatedRecordsByMovie(
+        'x_1080820_mvx_movie_actor',
+        function(gr) {
+            return {
+                name: gr.getDisplayValue('actor_ref'),
+                role: gr.getValue('role_name'),
+                photo: gr.actor_ref.profile_url + ''
+            };
+        },
+        data.movie.actors
+    );
+
+    getRelatedRecordsByMovie(
+        'x_1080820_mvx_movie_genre',
+        function(gr) {
+            return gr.getDisplayValue('genre_ref');
+        },
+        data.movie.genres
+    );
+
+    getRelatedRecordsByMovie(
+        'x_1080820_mvx_movie_director',
+        function(gr) {
+            return {
+                name: gr.getDisplayValue('director_ref')
+            };
+        },
+        data.movie.directors
+    );
+
+    var ratingInfo = getAverageRating(sysId);
+    data.movie.averageRating = ratingInfo.averageRating;
+    data.movie.ratingCount = ratingInfo.ratingCount;
+
+    if (data.movie.isLoggedIn) {
+        var userReview = getUserReview(sysId, userId);
+
+        if (userReview) {
+            data.movie.hasUserRating = true;
+            data.movie.currentUserRating = userReview.rating;
+            data.movie.currentReviewId = userReview.reviewId;
+        }
+    }
+})();
+
+/*
+(function() {
+
+    var sysId = $sp.getParameter('sys_id');
+    if (!sysId)
+        return;
+
     var gr = new GlideRecord('x_1080820_mvx_movie');
     if (!gr.get(sysId))
         return;
@@ -113,16 +281,22 @@
         tmdbId: gr.getValue('tmdb_id'),
         genres: [],
         actors: [],
-        directors: []
+        directors: [],
+        averageRating: 0,
+        ratingCount: 0,
+        currentUserRating: '',
+        hasUserRating: false,
+        isLoggedIn: false,
+        currentReviewId: ''
     };
 
-    var grg = new GlideRecord('x_1080820_mvx_movie_genre');
-    grg.addQuery('movie_ref', sysId);
-    grg.query();
+    var grGenre = new GlideRecord('x_1080820_mvx_movie_genre');
+    grGenre.addQuery('movie_ref', sysId);
+    grGenre.query();
 
-    while (grg.next()) {
-        data.movie.genres.push(grg.getDisplayValue('genre_ref'));
-    }
+    while (grGenre.next()) {											//loop ide cez VSETKY NAJDENE výsledky
+        data.movie.genres.push(grGenre.getDisplayValue('genre_ref')); 	//získanie názvu cez genre_ref a uloženie do data.movie.genres
+    }																	//zoberie display hodnotu referencie (názov žánru)
 
     var gra = new GlideRecord('x_1080820_mvx_movie_actor');
     gra.addQuery('movie_ref', sysId);
@@ -147,20 +321,91 @@
         });
     }
 
-})();]]></script>
+    var grr = new GlideRecord('x_1080820_mvx_review');
+    grr.addQuery('movie_ref', sysId);
+    grr.query();
+
+    var ratingSum = 0;
+    var ratingCount = 0;
+
+    while (grr.next()) {
+        var rating = parseInt(grr.getValue('rating'), 10);
+        ratingSum += rating;
+        ratingCount++;
+    }
+
+    if (ratingCount > 0) {
+        data.movie.ratingCount = ratingCount;
+        data.movie.averageRating = (ratingSum / ratingCount).toFixed(1);
+    }
+
+    var userId = gs.getUserID();
+    var userName = gs.getUserName();
+
+    data.movie.isLoggedIn = userName !== 'guest';
+
+    if (data.movie.isLoggedIn) {
+        var grrr = new GlideRecord('x_1080820_mvx_review');
+        grrr.addQuery('movie_ref', sysId);
+        grrr.addQuery('user_ref', userId);
+        grrr.query();
+
+        if (grrr.next()) {
+            data.movie.hasUserRating = true;
+            data.movie.currentUserRating = parseInt(grrr.getValue('rating'));
+            data.movie.currentReviewId = grrr.getValue('sys_id');
+        }
+    }
+
+    if (input && input.action == 'saveRating') {
+        var gri = new GlideRecord('x_1080820_mvx_review');
+        gri.addQuery('movie_ref', sysId);
+        gri.addQuery('user_ref', userId);
+        gri.query();
+
+        if (gri.next()) {
+            gri.setValue('rating', input.rating);
+            gri.update();
+        } else {
+            gri.initialize();
+            gri.setValue('movie_ref', sysId);
+            gri.setValue('user_ref', userId);
+            gri.setValue('rating', input.rating);
+            gri.insert();
+        }
+    }
+})();
+
+function getRelatedRecordsByMovie(table, transformFunction, targetArray) {
+    var gr = new GlideRecord(table);
+    gr.addQuery('movie_ref', sysId);
+    gr.query();
+
+    while (gr.next()) {
+        // save_field.push(gr.getDisplayValue(ref_field));
+        var result = transformFunction(gr);
+        targetArray.push(result);
+    }
+}
+
+getRelatedRecordsByMovie('x_1080820_mvx_movie_genre', transformFunction, data.movie.genres);
+getRelatedRecordsByMovie('x_1080820_mvx_movie_actor', transformFunction, data.movie.actors);
+getRelatedRecordsByMovie('x_1080820_mvx_movie_director', transformFunction, data.movie.directors);
+
+*/]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-01-14 12:12:54</sys_created_on>
         <sys_id>c113a1fb9716ba103c50f91de053af80</sys_id>
-        <sys_mod_count>37</sys_mod_count>
+        <sys_mod_count>84</sys_mod_count>
         <sys_name>Movie Detail Widget</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_widget_c113a1fb9716ba103c50f91de053af80</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-04-20 08:24:13</sys_updated_on>
+        <sys_updated_on>2026-05-04 10:03:46</sys_updated_on>
         <template><![CDATA[<div class="movie-hero-tmdb" ng-if="data.movie">
     <div class="movie-hero-overlay">
         <!-- Bootstrap kontajner -->
@@ -193,6 +438,38 @@
                         Genres: {{data.movie.genres.join(', ')}}
                     </p>
 
+                    <p class="movie-meta" ng-if="data.movie.ratingCount &gt; 0">
+                        Rating: {{data.movie.averageRating}} / 10 ({{data.movie.ratingCount}})
+                    </p>
+
+                    <p class="movie-meta" ng-if="data.movie.ratingCount == 0">
+                        No ratings yet
+                    </p>
+
+                    <p ng-if="data.movie.hasUserRating">
+                        Your rating: {{data.movie.currentUserRating}}</p>
+
+                    <p ng-if="!data.movie.hasUserRating">
+                        Your rating: Not Rated</p>
+
+                    <div class="movie-meta" ng-if="data.movie.isLoggedIn">
+                        <label for="rating">Rate this movie:</label>
+
+                        <select id="rating" ng-model="c.data.selectedRating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <button ng-click="c.saveRating()">Save</button>
+                    </div>
+
                     <p class="text-muted" ng-if="data.movie.originalTitle &&
                     data.movie.originalTitle !== data.movie.title">
                         Original title: {{data.movie.originalTitle}}
@@ -208,13 +485,13 @@
                     <p class="movie-overview">
                         {{data.movie.description}}
                     </p>
-                  
-                  	<div class="movie-crew-section" ng-if="data.movie.directors.length">
-    					<div class="movie-crew-item" ng-repeat="director in data.movie.directors">
-        					<div class="movie-crew-name">{{director.name}}</div>
-        					<div class="movie-crew-role">Director</div>
-    					</div>
-					</div>
+
+                    <div class="movie-crew-section" ng-if="data.movie.directors.length">
+                        <div class="movie-crew-item" ng-repeat="director in data.movie.directors">
+                            <div class="movie-crew-name">{{director.name}}</div>
+                            <div class="movie-crew-role">Director</div>
+                        </div>
+                    </div>
 
                     <div class="movie-cast-section" ng-if="data.movie.actors.length">
                         <h4>Top Billed Cast</h4>
@@ -232,7 +509,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

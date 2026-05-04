@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field/>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Validate Movie Rating (1-10)</name>
+        <order/>
+        <script><![CDATA[function onSubmit(){
+    var rating = parseInt(g_form.getValue('rating'), 10);
+
+    if (rating < 1 || rating > 10) {
+        alert('Rating must be between 1 and 10');
+        return false;
+    }
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-04-22 09:01:40</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f331a1db975083103c50f91de053af6e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Validate Movie Rating (1-10)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_script_client_f331a1db975083103c50f91de053af6e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-04-22 10:47:07</sys_updated_on>
+        <table>x_1080820_mvx_review</table>
+        <type/>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
