@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="fd44a0ff97fc43503c50f91de053afb5" label="External Rating" max_length="40" name="x_1080820_mvx_external_rating" type="collection">
+        <element label="Source" max_length="40" name="source" type="string"/>
+        <element label="Rating" max_length="40" name="rating" type="string"/>
+        <element label="Votes" max_length="40" name="votes" type="string"/>
+        <element label="Movie_ref" max_length="32" name="movie_ref" reference="x_1080820_mvx_movie" type="reference"/>
+        <element label="IMDb ID" max_length="40" name="imdb_id" type="string"/>
+        <element label="Awards" max_length="255" name="awards" type="string_full_utf8"/>
+        <index name="index">
+            <element name="movie_ref"/>
+        </index>
+    </element>
+</database>

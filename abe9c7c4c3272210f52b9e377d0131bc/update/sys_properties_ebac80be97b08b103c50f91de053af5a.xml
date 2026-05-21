@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>OMDb API base URL</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_1080820_mvx.omdb.base_url</name>
+        <read_roles/>
+        <suffix>omdb.base_url</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-15 09:59:25</sys_created_on>
+        <sys_id>ebac80be97b08b103c50f91de053af5a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_1080820_mvx.omdb.base_url</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_properties_ebac80be97b08b103c50f91de053af5a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-15 10:19:50</sys_updated_on>
+        <type>string</type>
+        <value>https://www.omdbapi.com/</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=ebac80be97b08b103c50f91de053af5a"/>
+</record_update>

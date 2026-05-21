@@ -22,7 +22,8 @@ MovieImporter.prototype = {
             "x_1080820_mvx_movie_title": ["movie_ref", "language", "type"],
             "x_1080820_mvx_movie_actor": ["movie_ref", "actor_ref"],
             "x_1080820_mvx_movie_director": ["movie_ref", "director_ref"],
-            "x_1080820_mvx_movie_genre": ["movie_ref", "genre_ref"]
+            "x_1080820_mvx_movie_genre": ["movie_ref", "genre_ref"],
+            "x_1080820_mvx_external_rating": ["movie_ref", "source"]
         };
     },
 
@@ -48,11 +49,13 @@ MovieImporter.prototype = {
         var baseUrl = gs.getProperty("x_1080820_mvx.tmdb.base_url", "https://api.themoviedb.org/3/");
 
         var url = baseUrl.replace(/\/$/, '') + '/' + endpoint.replace(/^\/+/, '');
+
         if (params) {
             url += "?" + Object.keys(params).map(function(key) {
                 return key + "=" + encodeURIComponent(params[key]);
             }).join("&");
         }
+
 
         var tmdbRequest = new sn_ws.RESTMessageV2();
         tmdbRequest.setHttpMethod("GET");
@@ -83,6 +86,34 @@ MovieImporter.prototype = {
             }
         } catch (ex) {
             gs.error("[MovieImporter] Exception in callTmdb: " + ex.message);
+            return null;
+        }
+    },
+
+
+    callExternalData: function(imdbId) {
+        var apiKey = gs.getProperty("x_1080820_mvx.omdb.API_key", "");
+        var baseUrl = gs.getProperty("x_1080820_mvx.omdb.base_url", "https://www.omdbapi.com/");
+
+        var url = baseUrl + "?apikey=" + apiKey + "&i=" + imdbId;
+
+        var omdbRequest = new sn_ws.RESTMessageV2();
+        omdbRequest.setHttpMethod("GET");
+        omdbRequest.setEndpoint(url);
+
+        try {
+            var response = omdbRequest.execute();
+            var httpStatus = response.getStatusCode();
+            var responseBody = response.getBody();
+
+            if (httpStatus == 200) {
+                return JSON.parse(responseBody);
+            } else {
+                gs.error("[MovieImporter] OMDb error " + httpStatus + ": " + responseBody);
+                return null;
+            }
+        } catch (ex) {
+            gs.error("[MovieImporter] Exception in callExternalData: " + ex.message);
             return null;
         }
     },
@@ -188,19 +219,36 @@ MovieImporter.prototype = {
         });
         if (!details) return null;
 
+        var externalDetails = null;
+        if (details.imdb_id) {
+            externalDetails = this.callExternalData(details.imdb_id);
+        }
+
         if (!details.poster_path) {
             gs.warn("[MovieImporter] Movie " + details.title + " has no poster_path");
         }
 
         var movieSysId = this.upsert("x_1080820_mvx_movie", {
             tmdb_id: details.id,
+            imdb_id: details.imdb_id,
             title: details.title,
             original_title: details.original_title,
             festival_title: details.original_title,
             release_date: details.release_date,
             poster_url: this.buildImageUrl(details.poster_path),
-            description: details.overview || "No description available" 
+            description: details.overview || "No description available"
         });
+
+        if (externalDetails) {
+            this.upsert("x_1080820_mvx_external_rating", {
+                movie_ref: movieSysId,
+                source: "OMDb",
+                imdb_id: details.imdb_id,
+                rating: externalDetails.imdbRating,
+                awards: externalDetails.Awards,
+                votes: externalDetails.imdbVotes 
+            });
+        }
 
         this.importMovieTitles(details.id, movieSysId);
         this.importMovieGenres(details, movieSysId);
@@ -368,32 +416,18 @@ MovieImporter.prototype = {
     },
 
     type: "MovieImporter"
-};
-
-
-// (function() {
-//     var importer = new MovieImporter();
-
-//     var limit = 3;   
-//     var offset = 0;   
-
-//     gs.info("[BackgroundScript] Starting batch import from offset=" + offset + ", limit=" + limit);
-
-//     importer.importMoviesBatch(limit, offset);
-
-//     gs.info("[BackgroundScript] Batch import finished.");
-// })();]]></script>
+};]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-08-22 09:01:24</sys_created_on>
         <sys_id>1e68820dc3632210f52b9e377d013181</sys_id>
-        <sys_mod_count>51</sys_mod_count>
+        <sys_mod_count>61</sys_mod_count>
         <sys_name>MovieImporter</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sys_script_include_1e68820dc3632210f52b9e377d013181</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-09-22 08:24:20</sys_updated_on>
+        <sys_updated_on>2026-05-18 16:54:28</sys_updated_on>
     </sys_script_include>
 </record_update>
