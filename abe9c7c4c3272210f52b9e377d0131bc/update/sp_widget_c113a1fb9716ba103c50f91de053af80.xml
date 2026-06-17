@@ -121,11 +121,9 @@
     if (!movieGr.get(sysId))
         return;
 
-	var externalGr = new GlideRecord('x_1080820_mvx_external_rating');
-	externalGr.addQuery('movie_ref', sysId);
-	externalGr.query();
-
-    
+    var externalGr = new GlideRecord('x_1080820_mvx_external_rating');
+    externalGr.addQuery('movie_ref', sysId);
+    externalGr.query();
 
     var userId = gs.getUserID();
     var userName = gs.getUserName();
@@ -147,14 +145,26 @@
         hasUserRating: false,
         isLoggedIn: userName !== 'guest',
         currentReviewId: '',
+        // castOrder: movieGr.getValue('cast_order')
     };
 
-	if (externalGr.next()){
-		data.movie.externalRating = externalGr.getValue('rating');
-		data.movie.externalVotes = externalGr.getValue('votes');
-		data.movie.externalAwards = externalGr.getValue('awards');
-		data.movie.externalSource = externalGr.getValue('source');
-	}
+    // if (externalGr.next()) {
+    //     data.movie.externalRating = externalGr.getValue('rating');
+    //     data.movie.externalVotes = externalGr.getValue('votes');
+    //     data.movie.externalAwards = externalGr.getValue('awards');
+    //     data.movie.externalSource = externalGr.getValue('source');
+    // }
+
+    while (externalGr.next()) {
+        if (externalGr.getValue('source') == "TMDb") {
+            data.movie.tmdbRating = externalGr.getValue('rating');
+            data.movie.tmdbVotes = externalGr.getValue('votes');
+        } else if (externalGr.getValue('source') == "OMDb") {
+            data.movie.omdbRating = externalGr.getValue('rating');
+            data.movie.omdbVotes = externalGr.getValue('votes');
+            data.movie.externalAwards = externalGr.getValue('awards');
+        }
+    }
 
     function getUserReview(movieId, userId) {
         var reviewGr = new GlideRecord('x_1080820_mvx_review');
@@ -168,13 +178,12 @@
                 reviewId: reviewGr.getValue('sys_id')
             };
         }
-
         return null;
     }
 
     function saveRating(movieId, userId, rating) {
         var reviewGr = new GlideRecord('x_1080820_mvx_review');
-        reviewGr.addQuery('movie_ref', movieId);	//('movie_ref', sysId)
+        reviewGr.addQuery('movie_ref', movieId); //('movie_ref', sysId)
         reviewGr.addQuery('user_ref', userId);
         reviewGr.query();
 
@@ -183,7 +192,7 @@
             reviewGr.update();
         } else {
             reviewGr.initialize();
-            reviewGr.setValue('movie_ref', movieId);	//('movie_ref', sysId)
+            reviewGr.setValue('movie_ref', movieId); //('movie_ref', sysId)
             reviewGr.setValue('user_ref', userId);
             reviewGr.setValue('rating', rating);
             reviewGr.insert();
@@ -234,11 +243,16 @@
             return {
                 name: gr.getDisplayValue('actor_ref'),
                 role: gr.getValue('role_name'),
-                photo: gr.actor_ref.profile_url + ''
+                photo: gr.actor_ref.profile_url + '',
+                castOrder: gr.getValue('cast_order')
             };
         },
         data.movie.actors
     );
+
+    data.movie.actors.sort(function(a, b) {
+        return a.castOrder - b.castOrder;
+    });
 
     getRelatedRecordsByMovie(
         'x_1080820_mvx_movie_genre',
@@ -411,14 +425,14 @@ getRelatedRecordsByMovie('x_1080820_mvx_movie_director', transformFunction, data
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2026-01-14 12:12:54</sys_created_on>
         <sys_id>c113a1fb9716ba103c50f91de053af80</sys_id>
-        <sys_mod_count>125</sys_mod_count>
+        <sys_mod_count>131</sys_mod_count>
         <sys_name>Movie Detail Widget</sys_name>
         <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
         <sys_policy/>
         <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
         <sys_update_name>sp_widget_c113a1fb9716ba103c50f91de053af80</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2026-05-18 18:28:13</sys_updated_on>
+        <sys_updated_on>2026-05-29 13:25:39</sys_updated_on>
         <template><![CDATA[<div class="movie-hero-tmdb" ng-if="data.movie">
     <div class="movie-hero-overlay">
         <!-- Bootstrap kontajner -->
@@ -489,14 +503,19 @@ getRelatedRecordsByMovie('x_1080820_mvx_movie_director', transformFunction, data
                     </p>
 
                     <div class="movie-meta"
-                        ng-if="data.movie.externalRating || data.movie.externalVotes || data.movie.externalAwards">
+                        ng-if="data.movie.tmdbRating || data.movie.omdbRating || data.movie.tmdbVotes || data.movie.omdbVotes || data.movie.externalAwards">
                         <h4> External ratings:</h4>
-                        <p ng-if="data.movie.externalRating || data.movie.externalVotes">
-                            <span ng-if="data.movie.externalRating">IMDb rating: {{data.movie.externalRating}} / 10 </span>
-                            <span ng-if="data.movie.externalVotes">({{data.movie.externalVotes}} votes)</span>
+                        <p ng-if="data.movie.omdbRating || data.movie.omdbVotes">
+                            <span ng-if="data.movie.omdbRating && data.movie.omdbRating!='N/A'">IMDb rating: {{data.movie.omdbRating}} / 10 </span>
+                            <span ng-if="data.movie.omdbVotes && data.movie.omdbVotes!='N/A'">({{data.movie.omdbVotes}} votes)</span>
                         </p>
 
-                        <p ng-if="data.movie.externalAwards">
+                        <p ng-if="data.movie.tmdbRating || data.movie.tmdbVotes">
+                            <span ng-if="data.movie.tmdbRating">TMDb rating: {{data.movie.tmdbRating}} / 10 </span>
+                            <span ng-if="data.movie.tmdbVotes">({{data.movie.tmdbVotes}} votes)</span>
+                        </p>
+
+                        <p ng-if="data.movie.externalAwards && data.movie.externalAwards!='N/A'">
                             Awards: {{data.movie.externalAwards}}
                         </p>
                     </div>

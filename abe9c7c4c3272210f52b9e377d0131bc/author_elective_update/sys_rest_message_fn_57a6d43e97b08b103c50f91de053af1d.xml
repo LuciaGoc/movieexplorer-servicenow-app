@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn">
+    <sys_rest_message_fn action="DELETE">
+        <authentication_type>inherit_from_parent</authentication_type>
+        <basic_auth_password/>
+        <basic_auth_profile/>
+        <basic_auth_user/>
+        <content/>
+        <function_name>Default GET</function_name>
+        <http_method>get</http_method>
+        <lock>false</lock>
+        <oauth2_profile/>
+        <protocol_name/>
+        <qualified_name>OMDb API [ Default GET ]</qualified_name>
+        <rest_endpoint>https://www.omdbapi.com/</rest_endpoint>
+        <rest_message display_value="OMDb API">5b76907297348b103c50f91de053af86</rest_message>
+        <sys_class_name>sys_rest_message_fn</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-15 10:41:44</sys_created_on>
+        <sys_id>57a6d43e97b08b103c50f91de053af1d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Default GET</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_update_name>sys_rest_message_fn_57a6d43e97b08b103c50f91de053af1d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-15 10:41:44</sys_updated_on>
+        <use_basic_auth>false</use_basic_auth>
+        <use_mid_server/>
+        <use_mutual_auth>false</use_mutual_auth>
+    </sys_rest_message_fn>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</application>
+        <file_path/>
+        <instance_id>7d6348622b43e2583ce2fcd2ce91bfa0</instance_id>
+        <instance_name>dev351410</instance_name>
+        <name>sys_rest_message_fn_57a6d43e97b08b103c50f91de053af1d</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn"><sys_rest_message_fn action="INSERT_OR_UPDATE"><authentication_type>inherit_from_parent</authentication_type><basic_auth_password/><basic_auth_profile/><basic_auth_user/><content/><function_name>Default GET</function_name><http_method>get</http_method><lock>false</lock><oauth2_profile/><protocol_name/><qualified_name>OMDb API [ Default GET ]</qualified_name><rest_endpoint>https://www.omdbapi.com/</rest_endpoint><rest_message display_value="OMDb API">5b76907297348b103c50f91de053af86</rest_message><sys_class_name>sys_rest_message_fn</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2026-05-15 10:41:44</sys_created_on><sys_id>57a6d43e97b08b103c50f91de053af1d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Default GET</sys_name><sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package><sys_policy/><sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope><sys_update_name>sys_rest_message_fn_57a6d43e97b08b103c50f91de053af1d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-05-15 10:41:44</sys_updated_on><use_basic_auth>false</use_basic_auth><use_mid_server/><use_mutual_auth>false</use_mutual_auth></sys_rest_message_fn></record_update>]]></payload>
+        <payload_hash>1506595538</payload_hash>
+        <record_name>Default GET</record_name>
+        <reverted_from/>
+        <source>71b1e0a7975ef6103c50f91de053af85</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-15 10:41:44</sys_created_on>
+        <sys_id>1fa6187297348b103c50f91de053af80</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19e2b3a58e70000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-15 10:41:44</sys_updated_on>
+        <type>HTTP Method</type>
+        <update_guid>dba61872f6348b10c491378e8887317f</update_guid>
+        <update_guid_history>dba61872f6348b10c491378e8887317f:1506595538</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-05-17 11:31:39</sys_created_on>
+        <sys_db_object display_value="" name="sys_rest_message_fn">sys_rest_message_fn</sys_db_object>
+        <sys_id>8ee129ca118c4eae83caa31d48f63929</sys_id>
+        <sys_metadata>57a6d43e97b08b103c50f91de053af1d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Default GET</sys_name>
+        <sys_package display_value="Movie Explorer" source="x_1080820_mvx">abe9c7c4c3272210f52b9e377d0131bc</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Movie Explorer">abe9c7c4c3272210f52b9e377d0131bc</sys_scope>
+        <sys_scope_delete display_value="">b4818d0ec64c4b90938e43429105b100</sys_scope_delete>
+        <sys_update_name>sys_rest_message_fn_57a6d43e97b08b103c50f91de053af1d</sys_update_name>
+        <sys_update_version display_value="sys_rest_message_fn_57a6d43e97b08b103c50f91de053af1d">1fa6187297348b103c50f91de053af80</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-05-17 11:31:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
